@@ -1,0 +1,114 @@
+{{> header}}
+
+
+<div class="wrapper">
+	<!-- side menu -->
+	{{> leftmenu}}
+
+
+<aside>
+	<main class="grey lighten-4">
+		<div class="card-panel transparent z-depth-0 al-card">
+			<div class="card-panel z-depth-1 {{selectClass}}" style="margin-top: 0px;">
+				<h3 class="flow-text header">{{welcome}} Simulations</h3>
+				<label class="test">Select unit</label>
+				<div class="input-field">
+					<select class="units">
+							{{#each data}}
+							{{#each units}}
+						<option value={{unit}}>Unit {{unit}}: {{title}}</option>
+						{{/each}}
+						{{/each}}
+					</select> 			
+				</div>
+			</div>
+
+				 <!--form action = "http://127.0.0.1:8081/isubject3" method = "GET">
+					title: <input type = "text" name = "title">  
+					grade: <input type = "number" name = "grade"><br>
+					subject: <input type = "text" name = "subject">  
+					unit: <input type = "text" name = "unit"><br>
+					pic: <input type = "text" name = "pic">  
+					description: <input type = "text" name = "description"><br>
+					theory: <input type = "text" name = "theory">  
+					<input type = "submit" value = "Submit">
+				 </form-->
+
+			 	<!-- Simulations of units -->
+			<section id="mulu" class="">
+				<div class="card-panel transparent z-depth-0" style="padding-left: 0px;padding-right: 0px;">
+					<div class="row">
+						<!--One -->
+						<div class="col m4 l4 ">
+							<div class="hide" id="oneX">
+								<div class="card-image waves-effect waves-block waves-light">
+									<a href="#" id="one2"><img src="" alt="blog-img" id="oneImg">
+									</a>
+								</div>
+								<div class="card-content">
+									<a href="#" class="grey-text text-darken-4" id="one">
+										Title Goes Here</a>
+								</div>
+							</div>
+						</div>
+						<!--Two -->
+						<div class="col m4 l4 ">
+							<div class="hide" id="twoX">
+								<div class="card-image waves-effect waves-block waves-light">
+									<a href="#" id="two2"><img src="" alt="blog-img" id="twoImg">
+										</a>
+								</div>
+								<div class="card-content">
+									<a href="#" class="grey-text text-darken-4" id="two">
+											Title Goes Here</a>
+								</div>
+							</div>
+						</div>
+						<!--Three -->
+						<div class="col m4 l4 ">
+							<div class="hide" id="threeX">
+								<div class="card-image waves-effect waves-block waves-light">
+									<a href="#" id="three2"><img src="" alt="blog-img" id="threeImg">
+										</a>
+								</div>
+								<div class="card-content">
+									<a href="#" class="grey-text text-darken-4" id="three">
+											Title Goes Here</a>
+								</div>
+							</div>
+						</div>
+						<!--Four -->
+						<div class="col m4 l4 ">
+							<div class="hide" id="fourX">
+								<div class="card-image waves-effect waves-block waves-light">
+									<a href="#" id="four2"><img src="" alt="blog-img" id="fourImg">
+										</a>
+								</div>
+								<div class="card-content">
+									<a href="#" class="grey-text text-darken-4" id="four">
+											Title Goes Here</a>
+								</div>
+							</div>
+						</div>
+						<!--Five -->
+						<div class="col m4 l4 ">
+							<div class="hide" id="fiveX">
+								<div class="card-image waves-effect waves-block waves-light">
+									<a href="#" id="five2"><img src="" alt="blog-img" id="fiveImg">
+										</a>
+								</div>
+								<div class="card-content">
+									<a href="#" class="grey-text text-darken-4" id="five">
+											Title Goes Here</a>
+								</div>
+							</div>
+						</div>
+					</div>  
+				</div>
+			</section>
+	</main>		
+</aside>
+</div>
+		
+  
+{{> subjfooter}}

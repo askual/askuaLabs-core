@@ -1,0 +1,79 @@
+{{> header}}
+
+
+<div class="wrapper">
+	<!-- side menu -->
+	{{> leftmenu}}
+
+	<main class="grey lighten-4">
+		
+		<div class="card-panel z-depth-0 al-card transparent">
+			<div class="fixed-action-btn">
+			  <a class="btn-floating btn-large waves-effect waves-light light-blue accent-2 tooltipped" data-position="top" data-delay="50" data-tooltip="Simulation" href="http://127.0.0.1:8081/real:{{parent}}">
+			    <i class="large mdi-av-play-arrow"></i>
+			  </a>
+			</div>
+	
+          <div id="multi-color-tab" class="section">
+           
+            	<div class="row">
+            		<div class="col m12 l12">
+            			 <h4 class="header flow-text">Build An ATOM</h4>
+            		</div>
+            		<div class="col s12 m12 l12">
+            		 <div class="row">
+            		 
+            		 	<ul class="tabs z-depth-1">
+
+	                      <li class="tab col s6 "><a class="white-text light-blue accent-2 waves-effect waves-light active" href="#description"><i class="mdi-action-toc"></i> Description</a>
+	                      </li>
+	                      <li class="tab col s6"><a class="white-text purple accent-2 waves-effect waves-light" href="#theory"><i class="mdi-action-settings-display"></i> Theory</a>
+	                      </li>
+	                      
+	                    </ul>
+            		 
+            		 	
+            		 </div>
+            			
+            		</div>
+            		<div class="col m12 l12">
+            			 <div id="description" class="col m12 l12 z-depth-0 grey lighten-5">
+            			 <div class="col m12 l12 light-blue accent-2 animated zoomIn">		 	
+                   </div>
+
+                  {{#each data}}
+                      <p>{{description}}</p>
+                  {{/each}}
+
+                    </div>
+                    <div id="theory" class="col s12 z-depth-0 grey lighten-5">
+	                    <div class="col m12 l12 purple accent-2 animated zoomIn">
+	            			 	
+	            		</div>
+                        {{#each data}}
+                      <p>{{{theory}}}</p>
+                        {{/each}}
+                    </div>
+                    
+            		</div>
+            	</div>
+          
+             
+                    
+                 
+                
+                   
+            </div>
+          
+
+
+		</div>
+	</main>
+
+
+	</div>
+
+
+
+
+	{{> footer}}

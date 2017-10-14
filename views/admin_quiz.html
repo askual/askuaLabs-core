@@ -1,0 +1,125 @@
+{{>header}}
+		
+	
+	<!-- side menu -->
+	<ul id="slide-out" class="side-nav fixed leftside-navigation grey lighten-3 z-depth-2">
+		<li>
+            <li>
+                <div class="user-view user-view-hm">
+                    <div class="name center">
+                        <h5 class="header">Admin-Panel</h5>
+                    </div>
+                </div>
+            </li>
+        </li>
+        <div class="divider"></div>
+            
+		<li><a class="collapsible-header waves-effect waves-cyan" href="admin_sim"><i class="mdi-editor-insert-chart"></i>Simulation Store</a></li>
+        <li class="active"><a class="collapsible-header waves-effect waves-cyan" href="#"><i class="mdi-action-help"></i>Quiz Store</a></li>
+		<li><a class="collapsible-header waves-effect waves-cyan" href="admin_acc"><i class="mdi-editor-insert-chart"></i>Account</a></li>
+		
+<li><a class="collapsible-header waves-effect waves-cyan" href="/index.html"><i class="mdi-editor-insert-chart"></i>Return To HOME</a></li>
+	
+	</ul>
+
+	<a href="#" data-activates="slide-out" class="button-collapse"></a>	
+	<!-- side menu end -->
+	</aside>
+
+
+	<main class=" grey lighten-4">
+		<div class="card-panel transparent z-depth-0 no-margin">
+			<div class="card-panel z-depth-0 grey lighten-5">
+				<div class="row">
+					<div class="col m6 l6">
+						<p class="flow-text no-margin">Quizes/Tests</p>
+					</div>
+					<div class="col m4 l6 row section right">
+
+						<form ref='uploadForm' 
+						id='uploadForm' 
+						action='http://localhost:8081/admin_quiz_upload' 
+						method='post' 
+						encType="multipart/form-data">
+						<input type="file" name="sampleFile" id="input-file-now-custom-2" class="dropify" data-height="55" />
+						<input type='submit' value='Upload!' />
+					</div>
+				</div>
+
+				<div class="divider"></div>
+				<table class="striped ">
+                    <thead>
+                      <tr>
+                        <th data-field="id">Title</th>
+                        <th data-field="name" class="right">Action(Export, Delete)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {{#each data}}
+                        <tr>
+                          <td>{{title}}</td>
+                          <td class="right">
+                              <button class="btn col s6 green waves-effect lighten-2"><i class="mdi-file-file-upload"></i></button>
+                              <button onclick=goTo("{{_id}}")  class="btn col s6 red waves-effect lighten-2"><i class="mdi-action-delete"></i></button>
+                          </td> 
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                  </table>
+
+                  <div id="mainQ">
+                  	
+                  </div>
+
+
+
+
+
+
+				
+			</div>
+		</div>
+	</main>
+</body>
+
+	<!-- jQuery Library -->
+	<script type="text/javascript" src="libs/js/plugins/jquery-1.11.2.min.js"></script>    
+	<!--materialize js-->
+    <script type="text/javascript" src="libs/js/materialize.min.js"></script>
+    <!--materialize js-->
+	<script type="text/javascript" src="libs/js/materialize.min.js"></script>
+	<!--scrollbar-->
+	<script type="text/javascript" src="libs/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="libs/js/script.js"></script>
+    <!--sweetalert -->
+	<script type="text/javascript" src="libs/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<!--dropify -->
+	<script type="text/javascript" src="libs/js/plugins/dropify/dropify.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function(){
+            // Basic
+            $('.dropify').dropify();
+
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove:  'Supprimer',
+                    error:   'Désolé, le fichier trop volumineux'
+                }
+            });
+
+            // Used events
+            var drEvent = $('.dropify-event').dropify();
+
+            drEvent.on('dropify.beforeClear', function(event, element){
+                return confirm("Do you really want to delete \"" + element.filename + "\" ?");
+            });
+
+            drEvent.on('dropify.afterClear', function(event, element){
+                alert('File deleted');
+            });
+        });
+    </script>
+</html>

@@ -1,0 +1,57 @@
+
+
+</body>
+
+ <!-- jQuery Library -->
+<script src="../../libs/js/plugins/jquery-1.11.2.min.js"></script>  
+<script>
+    var decodedJson = decodeURIComponent("{{{data}}}");
+    var jsonObj = JSON.parse(decodedJson);
+
+    var arr = ['one','two','three','four','five'];
+
+
+    changeUnit(1);
+
+    $('.units').change(function(){
+        var unit = $(this).val();
+        changeUnit(unit);
+    });
+
+    function changeUnit(u){
+        var thisArr = jsonObj.filter(function(elt){
+            return elt.unit == u+"";
+            });
+        console.log("Doom BOom",thisArr);
+        //$('#mulu').removeClass();
+        //$('#mulu').removeClass().addClass('fadeInUp animated');
+        //$('.IsBestAnswer').addClass('bestanswer').removeClass('IsBestAnswer');
+        ///*
+        for(var i=0;i<thisArr.length;i++){
+            $("#"+arr[i]+"X").removeClass();
+            $("#"+arr[i]+"X").addClass('card amber accent-2');
+            document.getElementById(arr[i]+"").innerHTML 	= thisArr[i].title;
+            document.getElementById(arr[i]+"").href 		= "http://127.0.0.1:8081/sim:"+thisArr[i]._id;
+            document.getElementById(arr[i]+"2").href 		= "http://127.0.0.1:8081/sim:"+thisArr[i]._id;
+            document.getElementById(arr[i]+"Img").src 		= thisArr[i].pic;
+            document.getElementById(arr[i]+"Img").alt 		= thisArr[i].title;
+        }
+        for(var i=thisArr.length;i<3;i++){
+            $("#"+arr[i]+"X").removeClass();
+            $("#"+arr[i]+"X").addClass('hide');
+        }
+        //document.getElementById("MyElement").classList.add('MyClass');
+
+
+    }	  
+</script>  
+<!--materialize js-->
+<script src="../../libs/js/materialize.min.js"></script>
+<!--prism-->
+
+<!--scrollbar-->
+<script src="../../libs/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="../../libs/js/script.js"></script>
+
+
+</html>

@@ -1,0 +1,205 @@
+html,body{
+	
+	margin: 0;
+	padding: 0;
+
+	max-width: 100%;
+	widows: 100%;
+	min-width: 100%; 
+
+	max-height: 100%;
+	height: 100%;
+	min-height: 100%; 
+}
+
+nav,main,footer{
+	padding-left: 250px;
+}
+main{
+	max-height: 100%;
+	height: 100%;
+	min-height: 100%; 
+
+	padding-bottom: 5%;
+}
+h1.logo-wrapper {
+  margin: 0;
+}
+
+h1 span.logo-text {
+  display: none;
+}
+.collection a{
+	 color: #03a9f4;
+}
+
+.menu-sidebar-collapse {
+  margin: 0 10px;
+}
+
+.menu-sidebar-collapse i {
+  line-height: 36px !important;
+}
+
+header .brand-logo {
+  margin: 1px 0;
+  padding: 0 10px 0 10px;
+
+}
+
+header .brand-logo img {
+  padding-top: 6px;
+}
+
+@media only screen and (max-width: 992px) {
+  nav .nav-wrapper {
+    text-align: center;
+  }
+  nav .nav-wrapper a.page-title {
+    font-size: 36px;
+  }
+  ul.side-nav.leftside-navigation {
+    top: 56px !important;
+  }
+}
+.btn-close{
+	transition: 0.3s ease-out;
+}
+.btn-close:hover{
+	transition: 0.3s ease-in;
+	color: #ff5252;
+}
+.al-sim-card img{
+	width: 100%;
+	height: 160px;
+}
+.al-margless{
+	margin: 0px !important;
+}
+.al-select {
+	 color: #40c4ff !important;
+}
+.al-pad{
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}
+.al-side-nav{
+	background-color: #b2b2b2;
+	color: #000 !important;
+}
+.al-nav-text{
+	color:  #fff !important;
+}
+/*.side-nav{
+	top: 65px;
+	width: 250px;
+}*/
+.user-view{
+	padding-bottom: 160px !important;
+	background-size: 100% 100%;
+}
+.user-view-hm{
+	background-image: url('../../assets/img/wel.png');
+}
+.user-view-si{
+	background-image: url('../../assets/img/magicTube.png');
+
+}
+.user-view-ph{
+	background-image: url('../../assets/img/wel.png');
+}
+.user-view-g9p{
+	background-image: url('../../assets/img/ph.png');
+}
+.user-view-g9c{
+	background-image: url('../../assets/img/test.png');
+}
+.user-view-g9b{
+	background-image: url('../../assets/img/bio-side-nav.png');
+}
+/**/
+.ps-scrollbar-x-rail {
+  z-index: 9999;
+}
+
+.ps-scrollbar-y-rail {
+  z-index: 9999;
+}
+
+.al-header-text{
+	color: #40c4ff;
+}
+.al-close{
+	font-size: 14px !important;
+	text-transform: lowercase;
+	padding: 10px;
+	margin-left: 3px !important;
+}
+.al-bottom-card{
+	
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.al-card{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+.al-about{
+	background-color: #b2b2b2;
+	
+}
+.al-sim{
+	background-color: #b2b2b2;
+	
+
+}
+.al-help{
+	background-color: #b2b2b2;
+}
+.al-container{
+	padding: 10px;
+	
+}
+.phybg{
+	background-image: url('../../assets/img/phybg.jpg');
+	background-size:  100%;
+}
+.chmbg{
+	background-image: url('../../assets/img/chemibg.jpg');
+	background-size:  100%;
+}
+.biobg{
+	background-image: url('../../assets/img/biobg.jpg');
+	background-size:  100%;
+}
+#left-sidebar-nav {
+  position: fixed;
+  width: 100px;
+  left: 180px;
+  z-index: 999;
+  height: auto;
+}
+.al-active{
+	 color: #40c4ff;
+}
+.side-nav .collapsible-body li.active,
+.side-nav.fixed .collapsible-body li.active {
+  background-color: #03a9f4;
+}
+
+.side-nav .collapsible-body li.active a,
+.side-nav.fixed .collapsible-body li.active a {
+  color: #fff;
+}
+
+.side-nav.fixed.leftside-navigation .collapsible-body li.active > a {
+  color: #03a9f4;
+}
+
+ul.side-nav.leftside-navigation li.active > a {
+  color: #03a9f4;
+}
+ul.side-nav.leftside-navigation li.active > a > i {
+  color: #03a9f4;
+}
