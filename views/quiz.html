@@ -1,0 +1,152 @@
+{{>header}}
+{{>leftmenu}}
+
+
+<main class=" grey lighten-4">
+    <div class="card-panel transparent z-depth-0 no-margin">
+        <div class="card-panel z-depth-0 grey lighten-5">
+            <div class="row">
+                <div class="col m5 l5">
+                    <h5 class="header-text">Available quiz</h5>
+                    <small></small>
+                </div>
+            </div>
+
+
+
+
+
+            <table id="data-table-simple" class="responsive-table display" cellspacing="0">
+                    <thead>
+                        <tr>
+                                <th>Title</th>
+                                <th>Subject</th>
+                            <th>Grade Level</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                            {{#each data}}
+
+                            <tr>
+                                <td>{{title}}</td>
+                                <td>Phy</td>
+                                <td>9</td>
+
+
+                            <td><a href="http://127.0.0.1:8081/takeQuiz:{{_id}}" class="btn col s6 green waves-effect lighten-2" >Take the Quiz</i></a></td>
+                        </tr>
+
+                        {{/each}}
+
+                    </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="divider"></div>
+
+        </div>
+    </div>
+</main>
+
+
+
+</body>
+
+
+
+
+	<!-- jQuery Library -->
+	<script type="text/javascript" src="libs/js/plugins/jquery-1.11.2.min.js"></script>
+	<!--materialize js-->
+	<script type="text/javascript" src="libs/js/materialize.min.js"></script>
+
+	<script type="text/javascript" src="libs/js/materialize-plugin/leanModal.js"></script>
+
+
+	 <!-- chartjs -->
+     <script type="text/javascript" src="libs/js/plugins/chartjs/chart.min.js"></script>
+
+
+    <!--sweetalert -->
+    <script type="text/javascript" src="libs/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<!-- askualabs script -->
+	<script src="libs/js/script.js"></script>
+	<!-- quiz gen -->
+    <script src="libs/js/quizGenerator.js"></script>
+    <!-- data-tables -->
+    <script type="text/javascript" src="libs/js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function(){
+    $('#data-table-simple').DataTable();
+
+
+    var table = $('#data-table-row-grouping').DataTable({
+        "columnDefs": [
+            { "visible": false, "targets": 2 }
+        ],
+        "order": [[ 2, 'asc' ]],
+        "displayLength": 25,
+        "drawCallback": function ( settings ) {
+            var api = this.api();
+            var rows = api.rows( {page:'current'} ).nodes();
+            var last=null;
+
+            api.column(2, {page:'current'} ).data().each( function ( group, i ) {
+                if ( last !== group ) {
+                    $(rows).eq( i ).before(
+                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+                    );
+
+                    last = group;
+                }
+            } );
+        }
+    });
+
+    // Order by the grouping
+    $('#data-table-row-grouping tbody').on( 'click', 'tr.group', function () {
+        var currentOrder = table.order()[0];
+        if ( currentOrder[0] === 2 && currentOrder[1] === 'asc' ) {
+            table.order( [ 2, 'desc' ] ).draw();
+        }
+        else {
+            table.order( [ 2, 'asc' ] ).draw();
+        }
+    } );
+
+
+    });
+    </script>
+
+
+
+</html>

@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var hbs = require('hbs');
-var Datastore = require('nedb');  
+var Datastore = require('nedb');
 var fs = require('fs-extra');
 var path = require('path');
 var multer = require('multer');
@@ -30,29 +30,29 @@ hbs.registerHelper('json', function (content) {
 });
 
 //connection to the users collection
-var users = new Datastore({ filename: 'db/user.db', autoload: true });  
+var users = new Datastore({ filename: 'db/user.db', autoload: true });
 users.loadDatabase();
 //connection to the simulations collection
-var simulation = new Datastore({ filename: 'db/simulation.db', autoload: true });  
+var simulation = new Datastore({ filename: 'db/simulation.db', autoload: true });
 simulation.loadDatabase();
 //connection to the subjects collection
-var subject = new Datastore({ filename: 'db/subject.db', autoload: true });  
+var subject = new Datastore({ filename: 'db/subject.db', autoload: true });
 subject.loadDatabase();
 
 //connection to the Admin collection
-var admin = new Datastore({ filename: 'db/admin.db', autoload: true });  
+var admin = new Datastore({ filename: 'db/admin.db', autoload: true });
 admin.loadDatabase();
 //connection to the Quiz collection
-var quiz = new Datastore({ filename: 'db/quiz.db', autoload: true });  
+var quiz = new Datastore({ filename: 'db/quiz.db', autoload: true });
 quiz.loadDatabase();
 
 
 app.get('/', function (req, res) {
-    users.find({}, function (err, docs) {   
+    users.find({}, function (err, docs) {
         res.render('index',{data:docs,class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
     });
 });
-app.get('/index.html', function (req, res) {  
+app.get('/index.html', function (req, res) {
     users.find({}, function (err, docs) {
         res.render('index',{data:docs,class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
     });
@@ -64,7 +64,7 @@ app.get('/explore', function (req, res) {
         res.render('explore',{
             data:doc,class:"user-view-hm",welcome:"Explore"
         });
-    });  
+    });
 });
 app.get('/9phy', function (req, res) {
     var sim;
@@ -77,7 +77,7 @@ app.get('/9phy', function (req, res) {
                 simss : encodeURIComponent(JSON.stringify(sim))
             });
         })
-    });  
+    });
 });
 app.get('/9che', function (req, res) {
     var sim;
@@ -89,8 +89,8 @@ app.get('/9che', function (req, res) {
                 data:docs,sims:sim,class:"user-view-g9c",welcome:"Grade 9 Chemistry",selectClass:"chmbg",
                 simss : encodeURIComponent(JSON.stringify(sim))
             });
-        }) 
-    });      
+        })
+    });
 });
 app.get('/9bio', function (req, res) {
     var sim;
@@ -103,7 +103,7 @@ app.get('/9bio', function (req, res) {
                 simss : encodeURIComponent(JSON.stringify(sim))
             });
         })
-    });  
+    });
 });
 
 app.get('/sim:sim_id', function(req, res, next) {
@@ -156,22 +156,36 @@ app.get('/admin_quiz',function(req,res){
 app.post('/admin_quiz_upload', function(req, res) {
     if (!req.files)
         return res.status(400).send('No files were uploaded.');
-    console.log("hhhh");
     var d = __dirname+'/public/quizs/h.json';
-    var sampleFile = req.files.sampleFile;    
-    sampleFile.mv(d);
-    var json = JSON.parse(require('fs').readFileSync(d, 'utf8'));
-    console.log(json.toString());
-
+    var sampleFile = req.files.sampleFile;
+    sampleFile.mv(d, function(err) {
+      if (err)
+        return res.status(500).send(err);
+      fs.readFile(d, (err, data) => {
+          if (err) throw err;
+          var v = JSON.parse(data.toString());
+          quiz.insert(v, function (err, Doc) {
+            console.log(v.title);
+            res.send(v.title);
+          });
+        });
+    });
   });
-
+  app.get('/takeQuiz:quiz_id', function(req, res, next) {
+      var quiz_id = req.params.quiz_id;
+      quiz_id = quiz_id.slice(1, quiz_id.length);
+      //res.render('takequiz',{link:quiz_id});
+      quiz.find({_id:quiz_id}, function (err, doc) {
+          res.render('takequiz',{time:doc[0].timeAllowed,size:doc[0]["answers"].length,data:encodeURIComponent(JSON.stringify(doc[0]["questions"]))});
+      });
+  });
 
 app.get('/adminP',function(req,res){
     admin.find({}, function (err, doc) {
         if(doc[0].password == req.query.pass){
             res.render('admin_sim');
         }
-    }); 
+    });
 });
 
 
@@ -181,9 +195,9 @@ app.get('/adminP',function(req,res){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
+
 app.get('/q', function (req, res) {
-    res.render('question');  
+    res.render('question');
 });
 app.get('/qq', function (req, res) {
     response = {
@@ -192,12 +206,12 @@ app.get('/qq', function (req, res) {
         rollno:req.query.rollno,
         section:req.query.section,
         password:req.query.password
-     };  
+     };
 });
 
 
 app.get('/signup', function (req, res) {
-    res.render('signup');  
+    res.render('signup');
 });
 app.get('/signupP', function (req, res) {
     response = {
@@ -212,23 +226,27 @@ app.get('/signupP', function (req, res) {
             console.log("What???");
             res.end(JSON.stringify(response));
         }else{
-            users.insert(response, function (err, newDoc) {  
+            users.insert(response, function (err, newDoc) {
             });
             res.end(JSON.stringify(response));
         }
-    });  
-    
+    });
+
 })
-app.get('/login', function (req, res) {
-    res.render('login');
-})
+app.get('/quiz', function (req, res) {
+    quiz.find({}, function (err, docs) {
+        res.render('quiz',{data:docs,class:"user-view-hm",welcome:"AskuaLabs Quiz"});
+    });
+});
+
 app.get('/loginP', function (req, res) {
     response = {
         grade:req.query.grade,
         rollno:req.query.rollno,
         section:req.query.section,
         password:req.query.password
-     };
+    };
+
     users.find({ grade: response.grade , rollno: response.rollno, section:response.section}, function (err, doc) {
         if(doc.length==0){
             res.send("Please Sign Up");
@@ -238,8 +256,8 @@ app.get('/loginP', function (req, res) {
             res.send("Correct");
             console.log(doc);
         }
-    });  
-    
+    });
+
 })
 
 String.prototype.replaceAll = function(search, replacement) {
@@ -264,7 +282,7 @@ app.get('/hehe', function (req, res) {
     //fs.renameSync(__dirname+'/public/sims/plugin/sim.js',__dirname+'/public/sims/plugin/sim.txt');
     var v = __dirname+'/public/sims/plugin/about.json';
     var json = JSON.parse(require('fs').readFileSync(v, 'utf8'));
-    
+
     var response = {
         title:json.title,
         version:json.version,
@@ -279,18 +297,18 @@ app.get('/hehe', function (req, res) {
         theory:json.theory,
      };
      //res.end(JSON.stringify(response));
-    simulation.insert(response, function (err, Doc) {  
+    simulation.insert(response, function (err, Doc) {
         fs.readFile(__dirname+'/public/sims/plugin/sim.js','utf8', function read(err, data) {
             if (err) {
                 throw err;
             }
             var content = modify(data,Doc._id);
-            console.log("w=w",content);          
-            fs.writeFile(__dirname + "/public/sims/plugin/sim.js", content, (err) => { 
+            console.log("w=w",content);
+            fs.writeFile(__dirname + "/public/sims/plugin/sim.js", content, (err) => {
                 if (err) throw err;
 
                 fs.renameSync(__dirname+'/public/sims/plugin/',__dirname+'/public/sims/'+Doc._id+"/");
-                
+
             });
         });
     });
@@ -301,13 +319,13 @@ app.get('/hehe', function (req, res) {
 app.post('/upup', function(req, res) {
     if (!req.files)
         return res.status(400).send('No files were uploaded.');
- 
+
     let sampleFile = req.files.sampleFile;
     sampleFile.mv(__dirname+'/public/sims/hello.zip');
     decompress(__dirname+'/public/sims/hello.zip', __dirname+'/public/sims/plugin');
-    
+
     res.render('thanks');
-    
+
     /*
     //fs.createReadStream(__dirname+'/public/sims/hello.zip').pipe(unzip.Extract({ path: __dirname+'/public/sims' }));
     var unzipExtractor = unzip.Extract({ path: __dirname+'/public/sims/hello.zip'});
@@ -320,7 +338,7 @@ app.post('/upup', function(req, res) {
   app.post('/upup5', function(req, res) {
     if (!req.files)
       return res.status(400).send('No files were uploaded.');
-   
+
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     let sampleFile = req.files.sampleFile;
     // Use the mv() method to place the file somewhere on your server
@@ -331,18 +349,18 @@ app.post('/upup', function(req, res) {
         // listen for close event and perform parse
         unzipExtractor.on('close', function(){
             console.log("fuck!")});
-        
+
         /*    extract(__dirname+'/public/sims/hello.zip', {dir: __dirname+'/public/sims/plugin'}, function (err) {
             res.render('thanks');
         });
-        
+
         res.render('thanks');
         /*fs.createReadStream(__dirname+'/public/sims/hello.zip')
         .pipe(unzip.Extract({ path: __dirname+'/public/sims' }))
          .on('close', function () {
             var v = __dirname+'/public/sims/plugin/about.json';
             var json = JSON.parse(require('fs').readFileSync(v, 'utf8'));
-            
+
             var response = {
                 title:json.title,
                 version:json.version,
@@ -405,7 +423,7 @@ app.get('/process_get', function (req, res) {
        first_name:req.query.first_name,
        last_name:req.query.last_name
     };
-    users.insert(response, function (err, newDoc) {  
+    users.insert(response, function (err, newDoc) {
      });
     res.end(JSON.stringify(response));
 })
@@ -445,31 +463,31 @@ var c = function(){
 
 app.post('/insert2', function(req, res) {
     console.log("???");
-    
+
     upload(req, res, function(err) {
         ///*
         console.log("====");
         fs.createReadStream(__dirname+'/public/sims/hello.zip').pipe(unzip.Extract({ path: __dirname+'/public/sims' }));
-        
+
         //c();
         console.log("one");
         res.send("UUC");
         //*/
     });
-    
+
     /*
-    var result = ''; 
+    var result = '';
     multer({
       inMemory: true,
       onFileUploadData: function(file, data) {
         result += data;
-      },  
+      },
       onFileUploadComplete: function(file) {
         console.log(result); // This is what you want
-      }   
+      }
     }).single('userFile')(req, res, next);
     */
-    
+
   });
   app.post('/insert', function(req, res) {
     upload(req, res, function(err) {
@@ -481,11 +499,11 @@ app.post('/insert2', function(req, res) {
         });
     });
 app.post('/inssert2', function(req, res) {
-	
+
 	upload(req, res, function(err) {
         console.log("one");
-        
-        
+
+
         fs.createReadStream(__dirname+'/public/sims/hello.zip').pipe(unzip.Extract({ path: __dirname+'/public/sims' }));
         /*
         var about =  require(__dirname+'/public/sims/plugin/about.json');
@@ -504,9 +522,9 @@ app.post('/inssert2', function(req, res) {
         var x = fs.readFile(__dirname+'/public/sims/plugin/about.json');
         var xx = JSON.parse(x.toString());
         res.send(xx.author);
-        
+
         fs.createReadStream(__dirname+'/public/sims/hello.zip').pipe(unzip.Extract({ path: __dirname+'/public/sims' }));
-        
+
         fs.readFile(__dirname+'/public/sims/plugin/about.json', function(err, data) {
             var x = JSON.parse(data.toString());
             res.send(x.author);
@@ -536,7 +554,7 @@ app.get('/isubject3', function (req, res) {
         isbuiltin:true
      };
      //res.end(JSON.stringify(response));
-    simulation.insert(response, function (err, newDoc) {  
+    simulation.insert(response, function (err, newDoc) {
     });
  })
  app.get('/isubject2', function (req, res) {
@@ -550,7 +568,7 @@ app.get('/isubject3', function (req, res) {
      };
 
     subject.update({ name: response1.name ,grade: response1.grade}, { $push: { units: response2 } }, {}, function () {
-        // Now the fruits array is ['apple', 'orange', 'pear', 'banana'] 
+        // Now the fruits array is ['apple', 'orange', 'pear', 'banana']
       });
  })
  app.get('/isubject', function (req, res) {
@@ -558,7 +576,7 @@ app.get('/isubject3', function (req, res) {
        name:req.query.name,
        grade:req.query.grade
     };
-    subject.insert(response, function (err, newDoc) {  
+    subject.insert(response, function (err, newDoc) {
      });
  })
  app.get('/isubject7', function (req, res) {
@@ -567,8 +585,8 @@ app.get('/isubject3', function (req, res) {
     response = {
        sim:req.query.sim
     };
-    
-    fs.writeFile(__dirname + "/public/sims/"+v, response.sim, (err) => {  
+
+    fs.writeFile(__dirname + "/public/sims/"+v, response.sim, (err) => {
         if (err) throw err;
         console.log('Lyric saved!');
     });
@@ -625,7 +643,7 @@ app.get('/list_user', function (req, res) {
 })
 
 // This responds a GET request for abcd, abxcd, ab123cd, and so on
-app.get('/ab*cd', function(req, res) {   
+app.get('/ab*cd', function(req, res) {
    console.log("Got a GET request for /ab*cd");
    res.send('Page Pattern Match');
 })

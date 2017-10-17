@@ -1,0 +1,138 @@
+{{> header}}
+
+<body class="grey lighten-3">
+		<div class="card-panel transparent z-depth-0">
+
+			<div class="card-panel z-depth-0">
+				<div id="clock">??</div>
+				Name: <input type="text"></input>
+				Section: <input type="text"></input>
+				Rollno: <input type="number"></input>
+				<div class="row">
+					<p><strong>Instruction:</strong> Make sure your blah blha{{size}}<i class="mdi-navigation-check"></i></p>
+					<div class="divider"></div>
+
+					<div class="col s12">
+						<p id="q1" class="hide">1.What is that shit?</p>
+						<!-- the name attribiut needs to be the same for the same group of choice otherwise all can be selected -->
+						<div id="c1" class="choice1 hide">
+								<p>
+                  <input type ="radio" name="q1" id="q1a" />
+                  <label for="q1a" id="1a">Red</label>
+                </p>
+                <p>
+                  <input type="radio" name="q1" id="q1b"  />
+                  <label for="q1b" id="1b">Yellow</label>
+                </p>
+                <p>
+                  <input type="radio" name="q1" id="q1c" />
+                  <label for="q1c" id="1c">Red</label>
+                </p>
+                <p>
+                  <input type="radio" name="q1" id="q1d"  />
+                  <label for="q1d" id="1d">Yellow</label>
+                </p>
+			      </div>
+					</div>
+
+
+					<div class="col s12">
+						<p id="q2" class="hide">2.What is that shit?</p>
+						<!-- the name attribiut needs to be the same for the same group of choice otherwise all can be selected -->
+						<div id="c2" class="choice2 hide">
+								<p>
+                  <input type ="radio" name="q2" id="q2a" />
+                  <label for="q2a" id="2a">Red</label>
+                </p>
+                <p>
+                  <input type="radio" name="q2" id="q2b"  />
+                  <label for="q2b" id="2b">Yellow</label>
+                </p>
+                <p>
+                  <input type="radio" name="q2" id="q2c" />
+                  <label for="q2c" id="2c">Red</label>
+                </p>
+                <p>
+                  <input type="radio" name="q2" id="q2d"  />
+                  <label for="q2d" id="2d">Yellow</label>
+                </p>
+			      </div>
+					</div>
+
+					<button class="button btn" value="Submit" onclick="finish()">
+
+				</div>
+
+
+
+
+
+			</div>
+
+		</div>
+
+{{> scripts}}
+<script type="text/javascript">
+eval("var vv = {{time}}");
+var c = new Date();
+
+var d = c.getDate();
+var y = c.getFullYear();
+var m = c.getMonth()+1;
+
+var h = c.getHours();
+var min = c.getMinutes()+vv;
+var sec = c.getSeconds();
+
+var timetobe = ''+y+'/'+m+'/'+d+' '+h+':'+min +':'+sec+'';
+
+
+$('#clock').countdown(timetobe)
+.on('update.countdown', function(event) {
+  var format = '%H:%M:%S';
+  if(event.offset.totalDays > 0) {
+    format = '%-d day%!d ' + format;
+  }
+  if(event.offset.weeks > 0) {
+    format = '%-w week%!w ' + format;
+  }
+  $(this).html(event.strftime(format));
+})
+.on('finish.countdown', function(event) {
+  $(this).html('This offer has expired!')
+    .parent().addClass('disabled');
+
+});
+
+eval("var ss = {{size}}");
+var decodedJson = decodeURIComponent("{{{data}}}");
+var jsonObj = JSON.parse(decodedJson);
+console.log("hell",jsonObj.length);
+for(let t=1;t<=jsonObj.length;t++){
+			$("#q"+t).removeClass();
+			$("#c"+t).removeClass();
+
+			document.getElementById("q"+t).innerHTML = jsonObj[t-1]['Q'];
+			document.getElementById(t+"a").innerHTML = jsonObj[t-1]['A'];
+			document.getElementById(t+"b").innerHTML = jsonObj[t-1]['B'];
+			document.getElementById(t+"c").innerHTML = jsonObj[t-1]['C'];
+			document.getElementById(t+"d").innerHTML = jsonObj[t-1]['D'];
+}
+
+var e = document.getElementById("c1");
+var strUser = e.options[e.selectedIndex].value;
+
+
+function finish(){
+	
+
+	$("#radio_1").prop("checked", true);
+}
+
+
+
+
+
+
+</script>
+{{> footer}}
