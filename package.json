@@ -22,5 +22,5 @@
     "nedb": "^1.8.0",
     "unzip": "^0.1.11"
   },
-  "scripts" : { "start" : "nodemon app.js" }
+  "scripts" : { "start" : "node app.js" }
 }
