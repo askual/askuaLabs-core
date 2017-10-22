@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://askual.com/askualabs">
-    <img src="https://drive.google.com/file/d/0B--3u1GBJ5P6WHlvZUk5cmlaYk0/view?usp=sharing" width="150">
+    <img src="https://image.ibb.co/d9QAy6/simple_Logo.png" alt="simple_Logo" border="0" width="150">
   </a>
 
   <h3 align="center">AskuaLabs</h3>
