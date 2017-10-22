@@ -1,6 +1,6 @@
-# Project Title
+# askuaLabs-student
 
-One Paragraph of project description goes here
+It's a science simulation platform built with nodejs 
 
 ## Getting Started
 
@@ -58,6 +58,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
+* [Nodejs](http://www.dropwizard.io/1.0.2/docs/) - The Back-end
 * [Phaserjs](http://www.dropwizard.io/1.0.2/docs/) - The JavaScript game library
 * [Materialize](https://maven.apache.org/) - A front-end framework
 
@@ -71,8 +72,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Kibru Demeke** - *Initial work* - [PurpleBooth](https://github.com/deqiq)
-* **Yiwosin Dagne** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Kibru Demeke** - *Initial work* - [Github](https://github.com/deqiq) , [Telegram](https://telegram.me/deqiq) , [Email](kibdemta@gmail.com)
+* **Yiwosin Dagne** - *Initial work* - [Github](https://github.com/PurpleBooth) , [Telegram](https://telegram.me/deqiq) , [Email](yonidagne@gmail.com)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
