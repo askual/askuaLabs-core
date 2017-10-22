@@ -1,7 +1,6 @@
-![alt text](https://raw.githubusercontent.com/askual/assets/askualabs/simpleLogo.png )
 <p align="center">
   <a href="http://askual.com/askualabs">
-    <img src="https://raw.githubusercontent.com/askual/assets/askualabs/simpleLogo.png" width="150">
+    <img src="https://drive.google.com/file/d/0B--3u1GBJ5P6WHlvZUk5cmlaYk0/view?usp=sharing" width="150">
   </a>
 
   <h3 align="center">AskuaLabs</h3>
