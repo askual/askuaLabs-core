@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="http://materializecss.com/">
-    <img src="http://materializecss.com/res/materialize.svg" width="150">
+  <a href="http://askual.com/askualabs">
+    <img src="https://raw.githubusercontent.com/askual/assets/askualabs/simpleLogo.png" width="150">
   </a>
 
   <h3 align="center">AskuaLabs</h3>
