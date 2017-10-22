@@ -11,9 +11,7 @@
     <a href="http://askual.com/askualabs"><strong>-- Browse the official website --</strong></a>
     <br>
     <br>
-    <a href="https://travis-ci.org/Dogfalo/materialize">
-      <img src="https://travis-ci.org/Dogfalo/materialize.svg?branch=master" alt="Travis CI badge">
-    </a>
+    <a href="https://badge.fury.io/js/materialize"><img src="https://badge.fury.io/js/materialize.svg" alt="npm version" height="18"></a>
     <a href="https://badge.fury.io/js/materialize-css">
       <img src="https://badge.fury.io/js/materialize-css.svg" alt="npm version badge">
     </a>
