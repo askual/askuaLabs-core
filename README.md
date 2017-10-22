@@ -14,6 +14,13 @@
     <a href="https://nodejs.io/">
       <img src="https://img.shields.io/node/v/passport.svg" alt="npm version badge">
     </a>
+    <a href="https://nodejs.io/">
+      <img src="https://img.shields.io/badge/materialize-0.99.0-blue.svg" alt="npm version badge">
+    </a>
+    <a href="https://nodejs.io/">
+      <img src="https://img.shields.io/badge/nw.js-v0.26.0-green.svg" alt="npm version badge">
+    </a>
+
 </p>
 # askuaLabs-core
 
