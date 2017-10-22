@@ -1,4 +1,4 @@
-# askuaLabs-student
+# askuaLabs-core
 
 It's a science simulation platform built with nodejs 
 
@@ -75,7 +75,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 * **Kibru Demeke** - *Initial work* - [Github](https://github.com/deqiq) , [Telegram](https://telegram.me/deqiq) , [Email](kibdemta@gmail.com)
 * **Yiwosin Dagne** - *Initial work* - [Github](https://github.com/PurpleBooth) , [Telegram](https://telegram.me/deqiq) , [Email](yonidagne@gmail.com)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/askual/askuaLabs-core/contributors) who participated in this project.
 
 ## License
 
