@@ -8,6 +8,7 @@
   <p align="center">
     AskuaLabs, a science simulation software and platform.
     <br>
+    [![node](https://img.shields.io/node/v/passport.svg)]()
     <a href="http://askual.com/askualabs"><strong>-- Browse the official website --</strong></a>
     <br>
     <br>
