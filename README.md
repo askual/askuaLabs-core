@@ -1,6 +1,38 @@
+<p align="center">
+  <a href="http://materializecss.com/">
+    <img src="http://materializecss.com/res/materialize.svg" width="150">
+  </a>
+
+  <h3 align="center">MaterializeCSS</h3>
+
+  <p align="center">
+    Materialize, a CSS Framework based on material design.
+    <br>
+    <a href="http://materializecss.com/"><strong>-- Browse the docs --</strong></a>
+    <br>
+    <br>
+    <a href="https://travis-ci.org/Dogfalo/materialize">
+      <img src="https://travis-ci.org/Dogfalo/materialize.svg?branch=master" alt="Travis CI badge">
+    </a>
+    <a href="https://badge.fury.io/js/materialize-css">
+      <img src="https://badge.fury.io/js/materialize-css.svg" alt="npm version badge">
+    </a>
+    <a href="https://cdnjs.com/libraries/materialize">
+      <img src="https://img.shields.io/cdnjs/v/materialize.svg" alt="CDNJS version badge">
+    </a>
+    <a href="https://david-dm.org/Dogfalo/materialize">
+      <img src="https://david-dm.org/Dogfalo/materialize/status.svg" alt="dependencies Status badge">
+      </a>
+    <a href="https://david-dm.org/Dogfalo/materialize#info=devDependencies">
+      <img src="https://david-dm.org/Dogfalo/materialize/dev-status.svg" alt="devDependency Status badge">
+    </a>
+    <a href="https://gitter.im/Dogfalo/materialize">
+      <img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter badge">
+    </a>
+</p>
 # askuaLabs-core
 
-It's a science simulation platform built with nodejs 
+It's a science simulation platform built with nodejs
 
 ## Getting Started
 
@@ -68,7 +100,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
@@ -86,4 +118,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone who's code was used
 * Inspiration
 * etc
-
