@@ -1,3 +1,4 @@
+![alt text](https://raw.githubusercontent.com/askual/assets/askualabs/simpleLogo.png )
 <p align="center">
   <a href="http://askual.com/askualabs">
     <img src="https://raw.githubusercontent.com/askual/assets/askualabs/simpleLogo.png" width="150">
