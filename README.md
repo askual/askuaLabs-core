@@ -3,12 +3,12 @@
     <img src="http://materializecss.com/res/materialize.svg" width="150">
   </a>
 
-  <h3 align="center">MaterializeCSS</h3>
+  <h3 align="center">AskuaLabs</h3>
 
   <p align="center">
-    Materialize, a CSS Framework based on material design.
+    AskuaLabs, a science simulation software and platform.
     <br>
-    <a href="http://materializecss.com/"><strong>-- Browse the docs --</strong></a>
+    <a href="http://askual.com/askualabs"><strong>-- Browse the official website --</strong></a>
     <br>
     <br>
     <a href="https://travis-ci.org/Dogfalo/materialize">
