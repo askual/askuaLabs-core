@@ -13,16 +13,16 @@
     </li>
 </li>
 <div class="divider"></div>
-    
+
 <li class="active"><a class="collapsible-header waves-effect waves-cyan" href="#"><i class="mdi-action-help"></i>Simulation Store</a></li>
 <li><a class="collapsible-header waves-effect waves-cyan" href="admin_quiz"><i class="mdi-editor-insert-chart"></i>Quiz Store</a></li>
 <li><a class="collapsible-header waves-effect waves-cyan" href="admin_acc"><i class="mdi-editor-insert-chart"></i>Account</a></li>
 <li><a class="collapsible-header waves-effect waves-cyan" href="/index.html"><i class="mdi-editor-insert-chart"></i>Return To HOME</a></li>
-    
+
 
 </ul>
 
-<a href="#" data-activates="slide-out" class="button-collapse"></a>	
+<a href="#" data-activates="slide-out" class="button-collapse"></a>
 <!-- side menu end -->
 </aside>
 
@@ -35,7 +35,7 @@
                     <p class="flow-text no-margin">Account Detail</p>
                 </div>
                 <div class="col m6 l6 modal-fixed-footer">
-                    <button class="btn waves-effect right"><i class="mdi-content-add right"></i>Ad  
+                    <button class="btn waves-effect right"><i class="mdi-content-add right"></i>Ad
             </div>
             <div class="divider"></div>
             <table class="striped ">
@@ -45,7 +45,7 @@
                     <th data-field="name" class="right">Action(Export, Delete)</th>
                   </tr>
                 </thead>
-    
+
                 <tbody>
                 {{#each data}}
                   <tr>
@@ -53,11 +53,11 @@
                     <td class="right">
                         <button class="btn col s6 green waves-effect lighten-2"><i class="mdi-file-file-upload"></i></button>
                         <button onclick=goTo("{{_id}}")  class="btn col s6 red waves-effect lighten-2"><i class="mdi-action-delete"></i></button>
-                    </td> 
+                    </td>
                   </tr>
                 {{/each}}
                 </tbody>
-            </table>    
+            </table>
         </div>
     </div>
 </main>
@@ -66,14 +66,12 @@
     var goTo = function(x){
         window.location = "admin_simD:"+x;
     } 
- 
-
 </script>
 
 
 
 <!-- jQuery Library -->
-<script type="text/javascript" src="libs/js/plugins/jquery-1.11.2.min.js"></script>    
+<script type="text/javascript" src="libs/js/plugins/jquery-1.11.2.min.js"></script>
 <!--materialize js-->
 <script type="text/javascript" src="libs/js/materialize.min.js"></script>
 <!--materialize js-->

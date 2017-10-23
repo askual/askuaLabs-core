@@ -14,6 +14,41 @@ app.use(fileUpload());
 
 
 app.locals.title = 'AskuaLabs';
+//regarding scripts and styles
+let scripts =  {
+  "materialize" : "libs/js/materialize.min.js",
+  "jquery" : "libs/js/plugins/jquery-1.11.2.min.js",
+  "countdown" : "libs/js/plugins/jquery.countdown-2.1.0/jquery.countdown.js",
+  "sweetalert" : "libs/js/plugins/sweetalert/sweetalert.min.js",
+  "perfectscroll" : "libs/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"
+}
+let styles =  {
+  "materialize" : "libs/css/materialize.css",
+  "perfectscroll" : "libs/js/plugins/perfect-scrollbar/perfect-scrollbar.css",
+  "sweetalert" : "libs/js/plugins/sweetalert/sweetalert.css",
+  "dropify" : "libs/js/plugins/dropify/dropify.css",
+  "fontawesome" : "libs/font-awesome/css/font-awesome.min.css",
+  "custom" : "libs/css/style.css"
+}
+let enqueue_script = function(type,data){
+  let ans  = array();
+  if(data==undefined){
+    if(type=="style")
+      ans.push();
+    else if(type=="script")
+      ans.push();
+  }
+
+  for(let l=0;l<data.length;l++){
+    if(type=="style")
+      ans.push(styles[data[l]]);
+    else if(type=="script")
+      ans.push(scripts[data[l]]);
+  }
+return ans;
+}
+//////////////////////////////////////////////////////////////////////////////
+
 
 
 //treat html files as hbs files
@@ -45,6 +80,9 @@ admin.loadDatabase();
 //connection to the Quiz collection
 var quiz = new Datastore({ filename: 'db/quiz.db', autoload: true });
 quiz.loadDatabase();
+//connection to the Quiz Result collection
+var quizResult = new Datastore({ filename: 'db/quizResult.db', autoload: true });
+quizResult.loadDatabase();
 
 
 app.get('/', function (req, res) {
@@ -176,7 +214,7 @@ app.post('/admin_quiz_upload', function(req, res) {
       quiz_id = quiz_id.slice(1, quiz_id.length);
       //res.render('takequiz',{link:quiz_id});
       quiz.find({_id:quiz_id}, function (err, doc) {
-          res.render('takequiz',{time:doc[0].timeAllowed,size:doc[0]["answers"].length,data:encodeURIComponent(JSON.stringify(doc[0]["questions"]))});
+          res.render('takequiz',{quiz_id:quiz_id,time:doc[0].timeAllowed,size:doc[0]["answers"].length,data:encodeURIComponent(JSON.stringify(doc[0]["questions"]))});
       });
   });
 
@@ -593,66 +631,90 @@ app.get('/isubject3', function (req, res) {
  })
 
 
+
+ app.get('/quizfinish:quiz_id', function (req, res) {
+     let quiz_id = req.params.quiz_id;
+     quiz_id = quiz_id.slice(1, quiz_id.length);
+
+     let response = {
+        name:req.query.name,
+        section:req.query.section,
+        rollno:req.query.rollno,
+        size:req.query.size,
+
+
+        quiz_id: quiz_id/*
+        q1:req.query.q1 || "-",
+        q2:req.query.q2 || "-",
+        q3:req.query.q3 || "-",
+        q4:req.query.q4 || "-",
+        q5:req.query.q5 || "-",
+        q6:req.query.q6 || "-",
+        q7:req.query.q7 || "-",
+        q8:req.query.q8 || "-",
+        q9:req.query.q9 || "-",
+        q10:req.query.q10 || "-"*/
+     };
+     for(let v=1;v<=req.query.size;v++){
+       eval("response[\"q"+v+"\"]=req.query.q"+v+";");
+     }
+     //var v = JSON.parse(data.toString());
+     quizResult.insert(response, function (err, Doc) {
+        res.send(response.q1);
+     });
+
+
+
+ })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var server = app.listen(process.env.PORT || 8081, function () {
    var host = server.address().address
    var port = server.address().port
    console.log("Example app listening at http://%s:%s", host, port)
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-var express = require('express');
-var app = express();
-
-// This responds with "Hello World" on the homepage
-app.get('/', function (req, res) {
-   console.log("Got a GET request for the homepage");
-   res.send('Hello GET');
-})
-
-// This responds a POST request for the homepage
-app.post('/', function (req, res) {
-   console.log("Got a POST request for the homepage");
-   res.send('Hello POST');
-})
-
-// This responds a DELETE request for the /del_user page.
-app.delete('/del_user', function (req, res) {
-   console.log("Got a DELETE request for /del_user");
-   res.send('Hello DELETE');
-})
-
-// This responds a GET request for the /list_user page.
-app.get('/list_user', function (req, res) {
-   console.log("Got a GET request for /list_user");
-   res.send('Page Listing');
-})
-
-// This responds a GET request for abcd, abxcd, ab123cd, and so on
-app.get('/ab*cd', function(req, res) {
-   console.log("Got a GET request for /ab*cd");
-   res.send('Page Pattern Match');
-})
-
-var server = app.listen(8081, function () {
-
-   var host = server.address().address
-   var port = server.address().port
-
-   console.log("Example app listening at http://%s:%s", host, port)
-})
-*/

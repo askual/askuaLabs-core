@@ -4,63 +4,74 @@
 		<div class="card-panel transparent z-depth-0">
 
 			<div class="card-panel z-depth-0">
+
+				<form action = "http://127.0.0.1:8081/quizfinish:{{quiz_id}}" method = "GET">
 				<div id="clock">??</div>
-				Name: <input type="text"></input>
-				Section: <input type="text"></input>
-				Rollno: <input type="number"></input>
+				<input class="hide" name="size" value="{{size}}"></input>
+				Name: <input type="text" name="name"></input>
+				Section: <input type="text" name="section"></input>
+				Rollno: <input type="number" name="rollno"></input>
 				<div class="row">
 					<p><strong>Instruction:</strong> Make sure your blah blha{{size}}<i class="mdi-navigation-check"></i></p>
 					<div class="divider"></div>
 
-					<div class="col s12">
+					   <!--Name: <input type = "text" name = "name">
+					   grade: <input type = "number" name = "grade">
+					   password: <input type = "password" name = "password">
+					   Confirm password: <input type = "password" name = "password2">
+					   Roll No: <input type = "text" name = "rollno">
+					   Section: <input type = "text" name = "section">
+
+					   <input type = "submit" class="notification-button btn" value = "Submit">
+					</form-->
+				 <div class="col s12">
 						<p id="q1" class="hide">1.What is that shit?</p>
 						<!-- the name attribiut needs to be the same for the same group of choice otherwise all can be selected -->
 						<div id="c1" class="choice1 hide">
-								<p>
-                  <input type ="radio" name="q1" id="q1a" />
-                  <label for="q1a" id="1a">Red</label>
+								<p> A)
+                  <input type ="radio" name="q1" value="a" id="q1a" />
+                  <label for="q1a" id="1a" name="q1">Red</label>
                 </p>
-                <p>
-                  <input type="radio" name="q1" id="q1b"  />
-                  <label for="q1b" id="1b">Yellow</label>
+                <p> B)
+                  <input type ="radio" id="q1b" name="q1"  value="b" />
+                  <label for="q1b" id="1b" name="q1" >Yellow</label>
                 </p>
-                <p>
-                  <input type="radio" name="q1" id="q1c" />
-                  <label for="q1c" id="1c">Red</label>
+                <p> C)
+                  <input type="radio" name="q1" id="q1c" value="c"/>
+                  <label for="q1c" id="1c" name="q1" >Red</label>
                 </p>
-                <p>
-                  <input type="radio" name="q1" id="q1d"  />
-                  <label for="q1d" id="1d">Yellow</label>
+                <p> D)
+                  <input type="radio" name="q1" id="q1d" value="d" />
+                  <label for="q1d" id="1d" name="q1">Yellow</label>
                 </p>
 			      </div>
 					</div>
-
-
 					<div class="col s12">
-						<p id="q2" class="hide">2.What is that shit?</p>
-						<!-- the name attribiut needs to be the same for the same group of choice otherwise all can be selected -->
-						<div id="c2" class="choice2 hide">
-								<p>
-                  <input type ="radio" name="q2" id="q2a" />
-                  <label for="q2a" id="2a">Red</label>
-                </p>
-                <p>
-                  <input type="radio" name="q2" id="q2b"  />
-                  <label for="q2b" id="2b">Yellow</label>
-                </p>
-                <p>
-                  <input type="radio" name="q2" id="q2c" />
-                  <label for="q2c" id="2c">Red</label>
-                </p>
-                <p>
-                  <input type="radio" name="q2" id="q2d"  />
-                  <label for="q2d" id="2d">Yellow</label>
-                </p>
-			      </div>
-					</div>
+							<p id="q2" class="hide">2.What is that shit?</p>
+							<!-- the name attribiut needs to be the same for the same group of choice otherwise all can be selected -->
+							<div id="c2" class="choice2 hide">
+									<p>
+	                  <input type ="radio" name="q2" id="q2a" value="a" />
+	                  <label for="q2a" id="2a" name="q2">Red</label>
+	                </p>
+	                <p>
+	                  <input type="radio" name="q2" id="q2b" value="b" />
+	                  <label for="q2b" id="2b" name="q2">Yellow</label>
+	                </p>
+	                <p>
+	                  <input type="radio" name="q2" id="q2c" value="c" />
+	                  <label for="q2c" id="2c" name="q2">Red</label>
+	                </p>
+	                <p>
+	                  <input type="radio" name="q2" id="q2d" value="d" />
+	                  <label for="q2d" id="2d" name="q2">Yellow</label>
+	                </p>
+				      </div>
+						</div>
 
-					<button class="button btn" value="Submit" onclick="finish()">
 
+					<input type = "submit" class="button btn" value = "Submit" >
+				</form>
 				</div>
 
 
@@ -124,7 +135,7 @@ var strUser = e.options[e.selectedIndex].value;
 
 
 function finish(){
-	
+
 
 	$("#radio_1").prop("checked", true);
 }
