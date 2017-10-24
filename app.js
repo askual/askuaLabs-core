@@ -3,6 +3,7 @@ var app = express();
 var hbs = require('hbs');
 var Datastore = require('nedb');
 var fs = require('fs-extra');
+//var fs = require('fs');
 var path = require('path');
 var multer = require('multer');
 var unzip = require('unzip');
@@ -20,7 +21,8 @@ let scripts =  {
   "jquery" : "libs/js/plugins/jquery-1.11.2.min.js",
   "countdown" : "libs/js/plugins/jquery.countdown-2.1.0/jquery.countdown.js",
   "sweetalert" : "libs/js/plugins/sweetalert/sweetalert.min.js",
-  "perfectscroll" : "libs/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"
+  "perfectscroll" : "libs/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js",
+  "custom": "libs/js/script.js"
 }
 let styles =  {
   "materialize" : "libs/css/materialize.css",
@@ -31,12 +33,13 @@ let styles =  {
   "custom" : "libs/css/style.css"
 }
 let enqueue_script = function(type,data){
-  let ans  = array();
+  //let ans  = {"src":[]};
+  let ans  = [];
   if(data==undefined){
     if(type=="style")
-      ans.push();
+      data  = Array("fontawesome","materialize","perfectscroll","custom");
     else if(type=="script")
-      ans.push();
+      data  = Array("jquery","materialize","perfectscroll","custom");
   }
 
   for(let l=0;l<data.length;l++){
@@ -44,6 +47,7 @@ let enqueue_script = function(type,data){
       ans.push(styles[data[l]]);
     else if(type=="script")
       ans.push(scripts[data[l]]);
+      //ans["src"].push(scripts[data[l]]);
   }
 return ans;
 }
@@ -66,10 +70,10 @@ hbs.registerHelper('json', function (content) {
 
 //connection to the users collection
 var users = new Datastore({ filename: 'db/user.db', autoload: true });
-users.loadDatabase();
 //connection to the simulations collection
 var simulation = new Datastore({ filename: 'db/simulation.db', autoload: true });
 simulation.loadDatabase();
+users.loadDatabase();
 //connection to the subjects collection
 var subject = new Datastore({ filename: 'db/subject.db', autoload: true });
 subject.loadDatabase();
@@ -87,12 +91,18 @@ quizResult.loadDatabase();
 
 app.get('/', function (req, res) {
     users.find({}, function (err, docs) {
-        res.render('index',{data:docs,class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
+        let script = enqueue_script("script");
+        let style = enqueue_script("style");
+        let statics = { "script" : script, "style" : style }
+        res.render('index',{data:docs,statics:statics,class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
     });
 });
 app.get('/index.html', function (req, res) {
     users.find({}, function (err, docs) {
-        res.render('index',{data:docs,class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
+        let script = enqueue_script("script");
+        let style = enqueue_script("style");
+        let statics = { "script" : script, "style" : style }
+        res.render('index',{data:docs,statics:statics, class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
     });
 });
 
@@ -191,6 +201,32 @@ app.get('/admin_quiz',function(req,res){
     });
     //res.render('admin_quiz');
 });
+app.get('/admin_quiz_detail:quiz_id',function(req,res){
+  var quiz_id = req.params.quiz_id;
+  quiz_id = quiz_id.slice(1, quiz_id.length);
+  quizResult.find({quiz_id:quiz_id}, function (err, docs) {
+      res.render('admin_quiz_detail',{data:docs});
+  });
+});
+app.get('/quiz_detail_download:quiz_id', function(req, res) {
+    var quiz_id = req.params.quiz_id;
+    quiz_id = quiz_id.slice(1, quiz_id.length);
+//console.log("wow",quiz_id);
+    quizResult.find({_id:quiz_id}, function (err, docs,next) {
+        let filefile = __dirname + "/public/temp/quiz"+quiz_id+".json";
+        fs.openSync(filefile, 'w');
+        fs.writeFile(filefile, JSON.stringify(docs[0]), (err) => {
+            if (err) throw err;
+            console.log('Data saved!');
+            //next();
+            //res.send("Data Saved");
+            //var file = __dirname+ "/public/quiz/" + quiz_id.slice(1, quiz_id.length)+".json";
+            res.download(filefile);
+        });
+        //*/
+    });
+  });
+
 app.post('/admin_quiz_upload', function(req, res) {
     if (!req.files)
         return res.status(400).send('No files were uploaded.');

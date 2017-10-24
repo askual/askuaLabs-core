@@ -34,33 +34,26 @@
 					<div class="col m6 l6">
 						<p class="flow-text no-margin">Quizes/Tests</p>
 					</div>
-					<div class="col m4 l6 row section right">
-
-						<form ref='uploadForm'
-						id='uploadForm'
-						action='http://localhost:8081/admin_quiz_upload'
-						method='post'
-						encType="multipart/form-data">
-						<input type="file" name="sampleFile" id="input-file-now-custom-2" class="dropify" data-height="55" />
-						<input type='submit' value='Upload!' />
-					</div>
 				</div>
 
 				<div class="divider"></div>
 				<table class="striped ">
                     <thead>
                       <tr>
-                        <th data-field="id">Title</th>
-                        <th data-field="name" class="right">Action(Export, Delete)</th>
+                        <th data-field="id">Name</th>
+                        <th data-field="id">Section</th>
+                        <th data-field="id">Roll No</th>
+                        <th data-field="name" class="right">Action(Export)</th>
                       </tr>
                     </thead>
                     <tbody>
                         {{#each data}}
                         <tr>
-                          <td>{{title}}</td>
+                          <td>{{name}}</td>
+                          <td>{{section}}</td>
+                          <td>{{rollno}}</td>
                           <td class="right">
-                              <a href="admin_quiz_detail:{{quiz_id}}" class="btn col s6 green waves-effect lighten-2">Detail</a>
-                              <button onclick=goTo("{{_id}}")  class="btn col s6 red waves-effect lighten-2"><i class="mdi-action-delete"></i></button>
+                              <a href="quiz_detail_download:{{_id}}" class="btn col s6 green waves-effect lighten-2">Export</a>
                           </td>
                         </tr>
                         {{/each}}
@@ -93,36 +86,4 @@
 	<script src="libs/js/script.js"></script>
     <!--sweetalert -->
 	<script type="text/javascript" src="libs/js/plugins/sweetalert/sweetalert.min.js"></script>
-	<!--dropify -->
-	<script type="text/javascript" src="libs/js/plugins/dropify/dropify.js"></script>
-	<script type="text/javascript">
-				function goTo(x){
-					document.header = "";
-				}
-        $(document).ready(function(){
-            // Basic
-            $('.dropify').dropify();
-
-            // Translated
-            $('.dropify-fr').dropify({
-                messages: {
-                    default: 'Glissez-déposez un fichier ici ou cliquez',
-                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
-                    remove:  'Supprimer',
-                    error:   'Désolé, le fichier trop volumineux'
-                }
-            });
-
-            // Used events
-            var drEvent = $('.dropify-event').dropify();
-
-            drEvent.on('dropify.beforeClear', function(event, element){
-                return confirm("Do you really want to delete \"" + element.filename + "\" ?");
-            });
-
-            drEvent.on('dropify.afterClear', function(event, element){
-                alert('File deleted');
-            });
-        });
-    </script>
 </html>

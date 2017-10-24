@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.4"
+      "express": "^4.15.4"
   },
-  "scripts" : { "start" : "node app.js" }
+  "scripts" : { "start" : "nodemon app.js" }
 }
