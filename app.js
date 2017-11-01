@@ -51,6 +51,9 @@ let enqueue_script = function(type,data){
   }
 return ans;
 }
+let script = enqueue_script("script");
+let style = enqueue_script("style");
+let statics = { "script" : script, "style" : style }
 //////////////////////////////////////////////////////////////////////////////
 
 
@@ -91,26 +94,21 @@ quizResult.loadDatabase();
 
 app.get('/', function (req, res) {
     users.find({}, function (err, docs) {
-        let script = enqueue_script("script");
-        let style = enqueue_script("style");
-        let statics = { "script" : script, "style" : style }
         res.render('index',{data:docs,statics:statics,class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
     });
 });
 app.get('/index.html', function (req, res) {
     users.find({}, function (err, docs) {
-        let script = enqueue_script("script");
-        let style = enqueue_script("style");
-        let statics = { "script" : script, "style" : style }
         res.render('index',{data:docs,statics:statics, class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
     });
 });
 
 
 app.get('/explore', function (req, res) {
+
     simulation.find({}, function (err, doc) {
         res.render('explore',{
-            data:doc,class:"user-view-hm",welcome:"Explore"
+            data:doc,statics:statics,class:"user-view-hm",welcome:"Explore"
         });
     });
 });
@@ -121,7 +119,7 @@ app.get('/9phy', function (req, res) {
         subject.find({grade: "9", name: "physics"}, function (err, docs) {
             console.log("ddd",docs,sim);
             res.render('subj',{
-                data:docs,sims:sim,class:"user-view-g9p",welcome:"Grade 9 Physics",selectClass:"phybg",
+                data:docs,statics:statics,sims:sim,class:"user-view-g9p",welcome:"Grade 9 Physics",selectClass:"phybg",
                 simss : encodeURIComponent(JSON.stringify(sim))
             });
         })
@@ -134,7 +132,7 @@ app.get('/9che', function (req, res) {
         subject.find({grade: "9", name: "chemistry"}, function (err, docs) {
             console.log("ddd",docs,sim);
             res.render('subj',{
-                data:docs,sims:sim,class:"user-view-g9c",welcome:"Grade 9 Chemistry",selectClass:"chmbg",
+                data:docs,statics:statics,sims:sim,class:"user-view-g9c",welcome:"Grade 9 Chemistry",selectClass:"chmbg",
                 simss : encodeURIComponent(JSON.stringify(sim))
             });
         })
@@ -147,7 +145,7 @@ app.get('/9bio', function (req, res) {
         subject.find({grade: "9", name: "biology"}, function (err, docs) {
             console.log("ddd",docs,sim);
             res.render('subj',{
-                data:docs,sims:sim,class:"user-view-g9b",welcome:"Grade 9 Biology",selectClass:"biobg",
+                data:docs,statics:statics,sims:sim,class:"user-view-g9b",welcome:"Grade 9 Biology",selectClass:"biobg",
                 simss : encodeURIComponent(JSON.stringify(sim))
             });
         })
@@ -158,7 +156,7 @@ app.get('/sim:sim_id', function(req, res, next) {
     var sim_id = req.params.sim_id;
     sim_id = sim_id.slice(1, sim_id.length);
     simulation.find({_id:sim_id}, function (err, docs) {
-          res.render('simulation',{data:docs,parent:sim_id,class:"user-view-hm",welcome:"",});
+          res.render('simulation',{data:docs,statics:statics,parent:sim_id,class:"user-view-hm",welcome:"",});
       });
 });
 
@@ -166,22 +164,22 @@ app.get('/sim:sim_id', function(req, res, next) {
 app.get('/real:sim_id', function(req, res, next) {
     var sim_id = req.params.sim_id;
     sim_id = sim_id.slice(1, sim_id.length)+".js";
-    res.render('real',{link:sim_id});
+    res.render('real',{link:sim_id,statics:statics});
 });
 
 app.get('/help', function (req, res) {
-    res.render('help',{class:"user-view-hm",welcome:"Help"});
+    res.render('help',{statics:statics,class:"user-view-hm",welcome:"Help"});
 });
 app.get('/about', function (req, res) {
-    res.render('about',{class:"user-view-hm",welcome:"About"});
+    res.render('about',{class:"user-view-hm",statics:statics,welcome:"About"});
 });
 
 
 app.get('/admin',function(req,res){
-    res.render('admin');
+    res.render('admin',{statics:statics});
 });
 app.get('/admin_acc',function(req,res){
-    res.render('admin_acc');
+    res.render('admin_acc',{statics:statics});
 });
 app.get('/admin_sim',function(req,res){
     simulation.find({isbuiltin:false}, function (err, docs) {
