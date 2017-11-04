@@ -14,23 +14,24 @@ var express = require('express'),
 
 
 //========================== scripts and styles
-let scripts =  {
-  "materialize" : "libs/js/materialize.min.js",
-  "jquery" : "libs/js/plugins/jquery-1.11.2.min.js",
-  "countdown" : "libs/js/plugins/jquery.countdown-2.1.0/jquery.countdown.js",
-  "sweetalert" : "libs/js/plugins/sweetalert/sweetalert.min.js",
-  "perfectscroll" : "libs/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js",
-  "custom": "libs/js/script.js"
+let askualabs_script = {};
+askualabs_script.scripts =  {
+  "materialize" : "../../libs/js/materialize.min.js",
+  "countdown" : "../../libs/js/plugins/jquery.countdown-2.1.0/jquery.countdown.js",
+  "jquery" : "../../libs/js/plugins/jquery-1.11.2.min.js",
+  "perfectscroll" : "../../libs/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js",
+  "sweetalert" : "../../libs/js/plugins/sweetalert/sweetalert.min.js",
+  "custom": "../../libs/js/script.js"
 }
-let styles =  {
-  "materialize" : "libs/css/materialize.css",
-  "perfectscroll" : "libs/js/plugins/perfect-scrollbar/perfect-scrollbar.css",
-  "sweetalert" : "libs/js/plugins/sweetalert/sweetalert.css",
-  "dropify" : "libs/js/plugins/dropify/dropify.css",
-  "fontawesome" : "libs/font-awesome/css/font-awesome.min.css",
-  "custom" : "libs/css/style.css"
+askualabs_script.styles =  {
+  "materialize" : "../../libs/css/materialize.css",
+  "perfectscroll" : "../../libs/js/plugins/perfect-scrollbar/perfect-scrollbar.css",
+  "sweetalert" : "../../libs/js/plugins/sweetalert/sweetalert.css",
+  "dropify" : "../../libs/js/plugins/dropify/dropify.css",
+  "custom" : "../../libs/css/style.css",
+  "fontawesome" : "../../libs/font-awesome/css/font-awesome.min.css",
 }
-let enqueue_script = function(type,data){
+askualabs_script.enqueue_script = function(type,data){
   let ans  = [];
   if(data==undefined){
     if(type=="style")
@@ -40,27 +41,27 @@ let enqueue_script = function(type,data){
   }
   for(let l=0;l<data.length;l++){
     if(type=="style")
-      ans.push(styles[data[l]]);
+      ans.push(this.styles[data[l]]);
     else if(type=="script")
-      ans.push(scripts[data[l]]);
+      ans.push(this.scripts[data[l]]);
   }
 return ans;
 }
-let script = enqueue_script("script");
-let style = enqueue_script("style");
-let statics = { "script" : script, "style" : style }
+askualabs_script.default = function(){
+  let ans = {};
+  ans.script = this.enqueue_script("script");
+  ans.style =  this.enqueue_script("style");
+return ans;
+}
 
-
-
-//==========================
+//========================== application wide declarations
 app.use(fileUpload());
 app.locals.title = 'AskuaLabs';
 //treat html files as hbs files
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
-
+//Static files from public
 app.use(express.static('public'));
-
 //partials
 hbs.registerPartials(__dirname + '/views/partials' );
 //hbs helpers
@@ -69,40 +70,45 @@ hbs.registerHelper('json', function (content) {
 });
 
 
+
 //========================== Databases
-//connection to the users collection
-var users = new Datastore({ filename: 'db/user.db', autoload: true });
 //connection to the simulations collection
-var simulation = new Datastore({ filename: 'db/simulation.db', autoload: true });
-simulation.loadDatabase();
-users.loadDatabase();
+var simulations = new Datastore({ filename: 'db/simulation.db', autoload: true });
+simulations.loadDatabase();
 //connection to the subjects collection
-var subject = new Datastore({ filename: 'db/subject.db', autoload: true });
-subject.loadDatabase();
+var subjects = new Datastore({ filename: 'db/subject.db', autoload: true });
+subjects.loadDatabase();
 //connection to the Admin collection
 var admin = new Datastore({ filename: 'db/admin.db', autoload: true });
 admin.loadDatabase();
 //connection to the Quiz collection
-var quiz = new Datastore({ filename: 'db/quiz.db', autoload: true });
-quiz.loadDatabase();
+var quizs = new Datastore({ filename: 'db/quiz.db', autoload: true });
+quizs.loadDatabase();
 //connection to the Quiz Result collection
-var quizResult = new Datastore({ filename: 'db/quizResult.db', autoload: true });
-quizResult.loadDatabase();
+var quizResults = new Datastore({ filename: 'db/quizResult.db', autoload: true });
+quizResults.loadDatabase();
 
 
 
 
-//========================== Routes
+//========================== Controllers
 // Essential
-require('./routes/index')(app,users,statics);
-// Admin
-require('./routes/admin')(app,users,statics);
+require('./controllers/index')(app,askualabs_script,{
+    "simulations":simulations
+  });
 // Simulations
-require('./routes/simulations')(app,users,statics);
+require('./controllers/simulations')(app,askualabs_script,{
+    "simulations":simulations,"subjects": subjects
+  });
+// Admin
+require('./controllers/admin')(app,askualabs_script,{
+    "admin": admin
+});
+
 // Plus
-require('./routes/plus')(app,users,statics);
-// test = for development only
-require('./routes/test')(app,users,statics);
+//require('./controllers/plus')(app,askualabs_script,users);
+//for development only
+//require('./controllers/dev')(app,askualabs_script,users);
 
 
 

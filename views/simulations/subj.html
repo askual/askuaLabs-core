@@ -19,20 +19,9 @@
 						<option value={{unit}}>Unit {{unit}}: {{title}}</option>
 						{{/each}}
 						{{/each}}
-					</select> 			
+					</select>
 				</div>
 			</div>
-
-				 <!--form action = "http://127.0.0.1:8081/isubject3" method = "GET">
-					title: <input type = "text" name = "title">  
-					grade: <input type = "number" name = "grade"><br>
-					subject: <input type = "text" name = "subject">  
-					unit: <input type = "text" name = "unit"><br>
-					pic: <input type = "text" name = "pic">  
-					description: <input type = "text" name = "description"><br>
-					theory: <input type = "text" name = "theory">  
-					<input type = "submit" value = "Submit">
-				 </form-->
 
 			 	<!-- Simulations of units -->
 			<section id="mulu" class="">
@@ -103,12 +92,46 @@
 								</div>
 							</div>
 						</div>
-					</div>  
+					</div>
 				</div>
 			</section>
-	</main>		
+	</main>
 </aside>
 </div>
-		
-  
-{{> subjfooter}}
+
+{{> scripts}}
+<script>
+    var decodedJson = decodeURIComponent("{{{simss}}}");
+    var jsonObj = JSON.parse(decodedJson);
+    var arr = ['one','two','three','four','five','six','seven','eight','nine','ten'];
+
+
+
+    changeUnit(1);
+
+    $('.units').change(function(){
+        var unit = $(this).val();
+        changeUnit(unit);
+    });
+
+    function changeUnit(u){
+        var thisArr = jsonObj.filter(function(elt){
+            return elt.unit == u+"";
+            });
+        console.log("Doom BOom",thisArr);
+        for(var i=0;i<thisArr.length;i++){
+            $("#"+arr[i]+"X").removeClass();
+            $("#"+arr[i]+"X").addClass('card amber accent-2');
+            document.getElementById(arr[i]+"").innerHTML 	= thisArr[i].title;
+            document.getElementById(arr[i]+"").href 		= "sim/"+thisArr[i]._id;
+            document.getElementById(arr[i]+"2").href 		= "sim/"+thisArr[i]._id;
+            document.getElementById(arr[i]+"Img").src 		= thisArr[i].pic;
+            document.getElementById(arr[i]+"Img").alt 		= thisArr[i].title;
+        }
+        for(var i=thisArr.length;i<10;i++){
+            $("#"+arr[i]+"X").removeClass();
+            $("#"+arr[i]+"X").addClass('hide');
+        }
+    }
+</script>
+{{> footer}}

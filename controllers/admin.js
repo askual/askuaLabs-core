@@ -1,10 +1,12 @@
-module.exports = function(app,users,statics) {
+module.exports = function(app,scripts,db) {
   app.get('/admin',function(req,res){
-      res.render('admin',{statics:statics});
+      res.render('admin/admin',{statics:scripts.default()});
   });
+
   app.get('/admin_acc',function(req,res){
       res.render('admin_acc',{statics:statics});
   });
+  /*
   app.get('/admin_sim',function(req,res){
       simulation.find({isbuiltin:false}, function (err, docs) {
           res.render('admin_sim',{data:docs});
@@ -21,7 +23,6 @@ module.exports = function(app,users,statics) {
       quiz.find({}, function (err, docs) {
           res.render('admin_quiz',{data:docs});
       });
-      //res.render('admin_quiz');
   });
   app.get('/admin_quiz_detail:quiz_id',function(req,res){
     var quiz_id = req.params.quiz_id;
@@ -30,4 +31,5 @@ module.exports = function(app,users,statics) {
         res.render('admin_quiz_detail',{data:docs});
     });
   });
+  */
 }

@@ -53,4 +53,36 @@ module.exports = function(app,users,statics) {
           }
       });
   });
+  app.get('/quizfinish:quiz_id', function (req, res) {
+      let quiz_id = req.params.quiz_id;
+      quiz_id = quiz_id.slice(1, quiz_id.length);
+
+      let response = {
+         name:req.query.name,
+         section:req.query.section,
+         rollno:req.query.rollno,
+         size:req.query.size,
+
+
+         quiz_id: quiz_id/*
+         q1:req.query.q1 || "-",
+         q2:req.query.q2 || "-",
+         q3:req.query.q3 || "-",
+         q4:req.query.q4 || "-",
+         q5:req.query.q5 || "-",
+         q6:req.query.q6 || "-",
+         q7:req.query.q7 || "-",
+         q8:req.query.q8 || "-",
+         q9:req.query.q9 || "-",
+         q10:req.query.q10 || "-"*/
+      };
+      for(let v=1;v<=req.query.size;v++){
+        eval("response[\"q"+v+"\"]=req.query.q"+v+";");
+      }
+      //var v = JSON.parse(data.toString());
+      quizResult.insert(response, function (err, Doc) {
+         res.send(response.q1);
+      });
+});
+
 }
