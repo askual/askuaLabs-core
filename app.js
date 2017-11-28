@@ -70,7 +70,6 @@ hbs.registerHelper('json', function (content) {
 });
 
 
-
 //========================== Databases
 //connection to the simulations collection
 var simulations = new Datastore({ filename: 'db/simulation.db', autoload: true });
