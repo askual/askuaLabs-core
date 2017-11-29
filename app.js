@@ -102,7 +102,7 @@ require('./controllers/simulations')(app,askualabs_script,{
   });
 // Admin
 require('./controllers/admin')(app,askualabs_script,{
-    "admin": admin
+    "admin": admin,"simulations":simulations,"quizs":quizs
 });
 
 // Plus

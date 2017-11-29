@@ -46,13 +46,7 @@ module.exports = function(app,users,statics) {
         });
     });
 
-  app.get('/adminP',function(req,res){
-      admin.find({}, function (err, doc) {
-          if(doc[0].password == req.query.pass){
-              res.render('admin_sim');
-          }
-      });
-  });
+  
   app.get('/quizfinish:quiz_id', function (req, res) {
       let quiz_id = req.params.quiz_id;
       quiz_id = quiz_id.slice(1, quiz_id.length);

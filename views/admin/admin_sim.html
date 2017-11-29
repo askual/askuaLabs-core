@@ -1,30 +1,8 @@
-{{>header}}
+{{> header}}
+
+{{> admin_navbar}}
 
 
-<!-- side menu -->
-<ul id="slide-out" class="side-nav fixed leftside-navigation grey lighten-3 z-depth-2">
-<li>
-    <li>
-        <div class="user-view user-view-hm">
-            <div class="name center">
-                <h5 class="header">Admin-Panel</h5>
-            </div>
-        </div>
-    </li>
-</li>
-<div class="divider"></div>
-
-<li class="active"><a class="collapsible-header waves-effect waves-cyan" href="#"><i class="mdi-action-help"></i>Simulation Store</a></li>
-<li><a class="collapsible-header waves-effect waves-cyan" href="admin_quiz"><i class="mdi-editor-insert-chart"></i>Quiz Store</a></li>
-<li><a class="collapsible-header waves-effect waves-cyan" href="admin_acc"><i class="mdi-editor-insert-chart"></i>Account</a></li>
-<li><a class="collapsible-header waves-effect waves-cyan" href="/index.html"><i class="mdi-editor-insert-chart"></i>Return To HOME</a></li>
-
-
-</ul>
-
-<a href="#" data-activates="slide-out" class="button-collapse"></a>
-<!-- side menu end -->
-</aside>
 
 
 <main class=" grey lighten-4">
@@ -62,23 +40,12 @@
     </div>
 </main>
 </body>
-<script>
+<!--script>
     var goTo = function(x){
         window.location = "admin_simD:"+x;
     } 
-</script>
+</script-->
 
 
 
-<!-- jQuery Library -->
-<script type="text/javascript" src="libs/js/plugins/jquery-1.11.2.min.js"></script>
-<!--materialize js-->
-<script type="text/javascript" src="libs/js/materialize.min.js"></script>
-<!--materialize js-->
-<script type="text/javascript" src="libs/js/materialize.min.js"></script>
-<!--scrollbar-->
-<script type="text/javascript" src="libs/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="libs/js/script.js"></script>
-<!--sweetalert -->
-<script type="text/javascript" src="libs/js/plugins/sweetalert/sweetalert.min.js"></script>
-</html>
+{{> admin_footer}}
