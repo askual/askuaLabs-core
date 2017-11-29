@@ -2,7 +2,7 @@ module.exports = function(app,scripts,db) {
 
     app.get('/', function (req, res) {
         res.render('essentials/index',{statics:scripts.default(),class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
-      });
+    });
     app.get('/index', function (req, res) {
         res.render('essentials/index',{statics:scripts.default(),class:"user-view-hm",welcome:"Welcome To AskuaLabs"});
     });

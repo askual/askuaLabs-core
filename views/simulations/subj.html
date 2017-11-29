@@ -101,7 +101,9 @@
 
 {{> scripts}}
 <script>
-    var decodedJson = decodeURIComponent("{{{simss}}}");
+	var decodedJson = decodeURIComponent("{{{simss}}}");
+	eval("var now ='{{now}}';");
+	console.log(decodedJson);
     var jsonObj = JSON.parse(decodedJson);
     var arr = ['one','two','three','four','five','six','seven','eight','nine','ten'];
 
@@ -123,8 +125,10 @@
             $("#"+arr[i]+"X").removeClass();
             $("#"+arr[i]+"X").addClass('card amber accent-2');
             document.getElementById(arr[i]+"").innerHTML 	= thisArr[i].title;
-            document.getElementById(arr[i]+"").href 		= "sim/"+thisArr[i]._id;
-            document.getElementById(arr[i]+"2").href 		= "sim/"+thisArr[i]._id;
+            //document.getElementById(arr[i]+"").href 		= "sim/"+thisArr[i]._id;
+            //document.getElementById(arr[i]+"2").href 		= "sim/"+thisArr[i]._id;
+            document.getElementById(arr[i]+"").href 		= "/"+now+"/"+thisArr[i]._id;
+            document.getElementById(arr[i]+"2").href 		= "/"+now+"/"+thisArr[i]._id;
             document.getElementById(arr[i]+"Img").src 		= thisArr[i].pic;
             document.getElementById(arr[i]+"Img").alt 		= thisArr[i].title;
         }

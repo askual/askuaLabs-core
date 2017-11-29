@@ -10,7 +10,8 @@ var express = require('express'),
       fileUpload = require('express-fileupload'),
       decompress = require('decompress'),
       fss = require('fs-extra'),
-      extract = require('extract-zip');
+      extract = require('extract-zip'),
+      router = express.Router();
 
 
 //========================== scripts and styles
